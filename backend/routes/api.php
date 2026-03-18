@@ -6,6 +6,7 @@ use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\AgenceController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\RendezVousController;
+use App\Http\Controllers\CreneauController;
 use App\Http\Controllers\FileAttenteController;
 use App\Http\Controllers\TacheController;
 use App\Http\Controllers\NotificationController;
@@ -50,11 +51,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/utilisateurs/{id}',  [UtilisateurController::class, 'destroy']);
 
     // ── Rendez-vous ────────────────────────────────────────
-    Route::get('/rendez-vous',                      [RendezVousController::class, 'index']);
-    Route::get('/rendez-vous/{id}',                 [RendezVousController::class, 'show']);
-    Route::post('/rendez-vous',                     [RendezVousController::class, 'store']);
-    Route::put('/rendez-vous/{id}/statut',          [RendezVousController::class, 'updateStatut']);
-    Route::delete('/rendez-vous/{id}',              [RendezVousController::class, 'destroy']);
+    Route::get('/rendez-vous',                 [RendezVousController::class, 'index']);
+    Route::get('/rendez-vous/{id}',            [RendezVousController::class, 'show']);
+    Route::post('/rendez-vous',                [RendezVousController::class, 'store']);
+    Route::put('/rendez-vous/{id}/statut',     [RendezVousController::class, 'updateStatut']);
+    Route::delete('/rendez-vous/{id}',         [RendezVousController::class, 'destroy']);
+    Route::get('/rendez-vous/creneaux',        [RendezVousController::class, 'creneauxDisponibles']);
+
+    // ── Créneaux (géré par Manager) ────────────────────────
+    Route::get('/creneaux',                    [CreneauController::class, 'index']);
+    Route::get('/creneaux/{id}',               [CreneauController::class, 'show']);
+    Route::post('/creneaux/generer',           [CreneauController::class, 'generer']);
+    Route::put('/creneaux/{id}/statut',        [CreneauController::class, 'updateStatut']);
+    Route::delete('/creneaux/{id}',            [CreneauController::class, 'destroy']);
 
     // ── File d'attente ─────────────────────────────────────
     Route::get('/file-attente',                     [FileAttenteController::class, 'index']);

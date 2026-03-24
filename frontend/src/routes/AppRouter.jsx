@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Home from "../pages/auth/Home";
 import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 import ClientDashboard from "../pages/client/Dashboard";
 import ClientAppointment from "../pages/client/Appointment";
 import ClientTicket from "../pages/client/VirtualTicket";
@@ -34,8 +35,9 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/"         element={<Home />} />
+      <Route path="/login"    element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/client/dashboard"   element={<ProtectedRoute allowedRoles={["client"]}><ClientDashboard /></ProtectedRoute>} />
       <Route path="/client/appointment" element={<ProtectedRoute allowedRoles={["client"]}><ClientAppointment /></ProtectedRoute>} />
       <Route path="/client/ticket"      element={<ProtectedRoute allowedRoles={["client"]}><ClientTicket /></ProtectedRoute>} />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AuthProvider } from "./context/AuthContext";
+import { TasksProvider } from "./context/TasksContext";
 import AppRouter from "./routes/AppRouter";
 import "./index.css";
 
@@ -75,10 +76,10 @@ const SplashScreen = () => {
         {/* MODULES */}
         <div className="flex flex-wrap justify-center gap-2 mt-10">
           {[
-            { label: "Tickets", active: progress > 20 },
-            { label: "Rendez-vous", active: progress > 40 },
+            { label: "Tickets",       active: progress > 20 },
+            { label: "Rendez-vous",   active: progress > 40 },
             { label: "IA Prédictive", active: progress > 60 },
-            { label: "Sécurité", active: progress > 80 },
+            { label: "Sécurité",      active: progress > 80 },
           ].map((m, i) => (
             <span key={i} className={`text-xs px-3 py-1 rounded-full border font-bold transition-all duration-500
               ${m.active
@@ -115,7 +116,9 @@ function App() {
 
   return (
     <AuthProvider>
-      <AppRouter />
+      <TasksProvider>
+        <AppRouter />
+      </TasksProvider>
     </AuthProvider>
   );
 }

@@ -10,7 +10,7 @@ const links = [
 ];
 
 const TOTAL_TIME = 720;
-const ALERT_THRESHOLD = 120; // 2 minutes restantes = alerte
+const ALERT_THRESHOLD = 120;
 
 const VirtualTicket = () => {
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
@@ -27,10 +27,8 @@ const VirtualTicket = () => {
           setCalled(true);
           return 0;
         }
-        // Simuler avancement de position
         if (t === 480) setPosition(2);
         if (t === 240) setPosition(1);
-        // Alerte 2 minutes
         if (t === ALERT_THRESHOLD) setShowAlert(true);
         return t - 1;
       });
@@ -155,10 +153,10 @@ const VirtualTicket = () => {
           <h3 className="font-display font-bold text-white mb-5">Statut</h3>
           <div className="space-y-4">
             {[
-              { label: "Ticket généré", time: "09:15", step: 0 },
-              { label: "En file d'attente", time: "09:15", step: 0 },
-              { label: "Bientôt votre tour", time: "~09:25", step: 1 },
-              { label: "Passage au guichet", time: "~09:27", step: 2 },
+              { label: "Ticket généré",       time: "09:15",  step: 0 },
+              { label: "En file d'attente",   time: "09:15",  step: 0 },
+              { label: "Bientôt votre tour",  time: "~09:25", step: 1 },
+              { label: "Passage au guichet",  time: "~09:27", step: 2 },
             ].map((s, i) => {
               const isDoneStep = currentStep > s.step || isDone;
               const isActiveStep = currentStep === s.step && !isDone;
@@ -186,7 +184,6 @@ const VirtualTicket = () => {
               const pos = i + 1;
               const isPast = pos < position;
               const isCurrent = pos === position && !isDone;
-              const isFuture = pos > position;
               return (
                 <div key={i} className={`flex-1 h-12 rounded-xl flex items-center justify-center font-display font-bold text-sm transition-all
                   ${isPast ? "bg-teal-500/20 text-teal-400 border border-teal-500/30" :
